@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service and About page </title>
+    {% include 'partials/header1.html' %}
+</head>
+
+<body>
+    {% include 'partials/navbar1.html' %}
+
+    <section class="about" id="about">
+        <div class="container">
+
+            <div class="items">
+                <div class="item">
+                    <div class="heading">
+                        <div class="title">
+                            About me
+                        </div>
+                        <div class="subtitle">
+                            Read Something about me
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>My name’s Bhavin, and I am a photographer in Auckland. I have been doing
+                            photography for over three years now.
+                            I’ve covered many events in Auckland, and still think every events are absolutely
+                            magical.
+                        </p>
+                        <p>
+                            There are so many options on which you can select your photo type and place for your
+                            photoshoot.
+                            <br> <br>
+                            The Portrait :- The most often used photo is that of your own headshot. It is simple and
+                            gives the client a glimpse of who they will be working with. A good portrait to use is
+                            one where you are looking straight at the camera. It would have a feeling that you are
+                            looking and communicating directly with your client. It’s like you are already having a
+                            connection with them.
+                            <br> <br>
+                            Candid Shot :- You may want to present yourself as a fun and easy-to-work-with
+                            photographer. So, you can use a candid photo of yourself. Or maybe, you can edit your
+                            portrait and add some filters, elements, and designs to make it more creative. This
+                            works well if you are offering post-processing services as well. This way, clients will
+                            have an idea of how artistic you are.
+                            <br> <br>
+                            Action Shot :- You can also opt to choose a photo showing you at work. A photo showing you
+                            on the job means you are serious about your craft. If you have your own studio, this is
+                            a good way to showcase it too.
+                        </p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="image">
+                        <img src="{{ url_for('static', filename='public/images/about-me.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="services" id="services">
+        <div class="container">
+
+            <div class="heading">
+                <div class="title">
+                    Services
+                </div>
+                <div class="subtitle">
+                    What am I doing?
+                </div>
+            </div>
+
+            <div class="items">
+
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/1cut-icon.png') }}" alt="">
+                    <h3>Editing & Remixing</h3>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit.
+                    </p>
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/2doller-icon.png') }}" alt="">
+                    <h3>Commercial Friendly</h3>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit.
+                    </p>
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/3arrow-icon.png') }}" alt="">
+                    <h3>Optimized Victors</h3>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit.
+                    </p>
+                </div>
+
+
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/4community-icon.png') }}" alt="">
+                    <h3>Community Powered</h3>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit.
+                    </p>
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/5save-icon.png') }}" alt="">
+                    <h3>Easily to Find </h3>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit.
+                    </p>
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/6star-icon.png') }}" alt="">
+                    <h3>Best Work Can Had</h3>
+                    <p>
+                        Lorem ipsum, dolor sit amet consectetur adipisicing Lorem ipsum dolor sit amet
+                        consectetur adipisicing elit.
+                    </p>
+                </div>
+
+
+            </div>
+
+        </div>
+    </section>
+    {% include 'partials/footer.html' %}
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+
+
+
+/* login css */
+
+.loginbg {
+    background: linear-gradient(#3032329c, #111111bb), url('./../images/loginbackground.jpg');
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 100vh;
+  /* for backgrond color & image in full page */
+  padding: 10% 5%;
+  /* for text */
+  display: flex;
+  /* for keep text and everything in single coloum */
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  /* gap between text*/
+  color: #fff;
+  }
+  
+  .wrapper {
+    position: relative;
+    width: 400px;
+    height: 510px;
+    background: transparent;
+    border: 2px solid #777;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* for close button border radius */
+    transition: height .2s ease; /* for js of register swap in login */
+  }
+
+  .form-box{
+    width: 100%;
+    padding: 40px;
+  }
+
+  .form-box h2{
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+  }
+
+  .form-box .inputbox{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid ;
+    margin: 30px 0; /* 0 is for keep everything in middle*/
+  }
+
+.form-box .inputbox input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+  }
+
+.form-box .inputbox .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #1c527b;
+    line-height: 57px;
+  } 
+.form-box .rememberforgot{
+    font-size: .9em;
+    color: cadetblue;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .wrapper .form-box .rememberforgot label input{
+    /*accent-color: #161616; for check box color change */
+    margin: 3px;
+  }
+
+  .wrapper .form-box .rememberforgot a{
+    color: darkgray;
+    text-decoration: none;
+  }
+
+  .wrapper .form-box .rememberforgot a:hover{
+   text-decoration: underline;
+   color: #fff !important;
+  }
+
+  .wrapper .form-box .btn{
+    width: 100%;
+    height: 45px;
+    background: #1f6ca7;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+  }
+
+  .wrapper .form-box .loginregister{
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10ox;
+  }
+
+  .wrapper .form-box .loginregister p a{
+    text-decoration: none;
+    font-weight: 600;
+    color: #777;
+  }
+
+  .wrapper .form-box .loginregister p a:hover{
+    text-decoration: underline;
+  }
+
+  .wrapper .iconclose{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: brown;
+    font-size: 2em;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .loginbg .wrapper .form-box.register{
+    position: absolute;
+    transform: translateX(400px);
+  }
+
+  .wrapper.active{
+    height: 520px;
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+/* Base alert styles */
+.alert {
+  position: relative;
+  padding: 0.5rem;
+  border-radius: .25rem;
+  overflow: hidden;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between; /* Align text and close button */
+}
+
+/* Fade transition */
+.fade {
+  transition: opacity .15s linear;
+}
+
+/* Close button styles */
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.close {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+  opacity: .6;
+  transition: opacity .15s ease-in-out;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+/* Alert message types */
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+/* Prevent button from pushing text out of layout */
+button, select {
+  text-transform: none;
+}
+
+button, input {
+  overflow: hidden;
+}
+
+button, input, optgroup, select, textarea {
+  margin: 0;
+  font-family: inherit;
+}
+
+button {
+  border-radius: 0;
+}
+
+/* Fade-out on close */
+.alert-dismissible {
+  padding-right: 3rem; /* Allow space for the close button */
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+}

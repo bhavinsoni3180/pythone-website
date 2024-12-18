@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Google Maps API -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGKx4dbXrsi9FiJywYk8X8dnjd3JcVs38&libraries=places"></script>
+    <title>Document</title>
+    {% include 'partials/header1.html' %}
+</head>
+
+<body>
+    {% include 'partials/navbar1.html' %}
+    <div class="bookingbg">
+        <div class="bookwrapper">
+            <div class="bookform-box login">
+                <h2>MADE BOOKING FOR YOUR BIG DAY!</h2>
+                <!-- Notification for success -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="notification-container">
+                            {% for category, message in messages %}
+                                {% if category == 'success' %}
+                                    <div style="background-color: green;" class="notification success">
+                                        {{ message }}
+                                    </div>
+                                {% elif category == 'error' %}
+                                    <div style="background-color: red;" class="notification error">
+                                        {{ message }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <form method="post">
+
+                    <div class="bookinputbox">
+                        <input type="text" placeholder="Your Name" name="name" id="name" required>
+                    </div>
+                    <div class="bookinputbox">
+                        <input type="text" placeholder="Partner's Name" name="partnername" class="partnername" required>
+                    </div>
+                    <div class="bookinputbox">
+                        <input type="email" placeholder="Enter E-mail" name="email" id="email" required>
+                    </div>
+                    <div class="bookinputbox">
+                        <select name="occasiontype" id="occasiontype" class="shoottypes" onmousemove>
+                            <option value="">Select Your Occasion</option>
+                            <option value="engagement">Engagement</option>
+                            <option value="preWedding">Pre-Wedding Shoot</option>
+                            <option value="wedding">Wedding Shoot</option>
+                            <option value="reception">Reception Shoot</option>
+                            <option value="birthday">Birthday Shoot</option>
+                            <option value="commercial">Commercial Shoot</option>
+                            <option value="fashion">Fashion Shoot</option>
+                            <option value="pet">Pet Shoot</option>
+                        </select>
+                    </div>
+                    <div class="bookinputbox">
+                        <input type="datetime-local" placeholder="Date of Occasion(if final)" name="datetime"
+                            class="datetime" id="datetime" required>
+                    </div>
+                    <!-- Address input connected to Google Maps -->
+                    <div class="bookinputbox">
+                        <input type="text" placeholder="Location of Occasion" name="address" id="address" required>
+                    </div>
+
+                    <div id="map" style="height: 400px; width: 100%;"></div>
+
+                    <div class="bookinputbox">
+                        <input type="number" placeholder="Hours of Coverage" name="hoursofshoot" class="hoursofshoot"
+                            required>
+                    </div>
+                    <div class="bookinputbox">
+                        <input type="tel" placeholder="Contact Number" name="contactnumber" class="contactnumber"
+                            required>
+                    </div>
+
+                    <!-- Hidden inputs to store latitude and longitude of map -->
+                    <input type="hidden" id="latitude" name="latitude">
+                    <input type="hidden" id="longitude" name="longitude">
+
+                    <button type="submit" class="btn" id="btnlogin">Make Your Booking</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    {% include 'partials/footer.html' %}
+
+    <!-- For email and password icon-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Google Maps Script -->
+    <script>
+        let autocomplete;
+        let map;
+        let marker;
+
+        // Initialize the map and Autocomplete feature
+        function initMap() {
+            const defaultLocation = { lat: -34.397, lng: 150.644 }; // Default location (fallback)
+
+            // Initialize the Google Map
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: defaultLocation,
+                zoom: 8
+            });
+
+            // Create a marker to show on the map
+            marker = new google.maps.Marker({
+                position: defaultLocation,
+                map: map
+            });
+
+            // Initialize the Autocomplete functionality
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('address'), // The address input field
+                { types: ['geocode'] }
+            );
+
+            // When an address is selected from autocomplete, update the map
+            autocomplete.addListener('place_changed', function () {
+                const place = autocomplete.getPlace();
+
+                // Ensure that place.geometry exists before using it
+                if (!place.geometry) {
+                    alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                // Update the map to center on the selected location
+                const location = place.geometry.location;
+                map.setCenter(location);
+                marker.setPosition(location);
+
+                // Update hidden fields with latitude and longitude
+                document.getElementById('latitude').value = location.lat();
+                document.getElementById('longitude').value = location.lng();
+            });
+        }
+
+        // Make sure the map is initialized once the page is fully loaded
+        window.onload = function () {
+            initMap();
+        }
+    </script>
+
+</body>
+
+</html>

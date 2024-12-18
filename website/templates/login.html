@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='public/css/stylelogin.css')}}">
+    {% include 'partials/header1.html' %}
+</head>
+
+<body>
+    {% include 'partials/navbar1.html' %}
+    <div class="loginbg">
+        <div class="wrapper">
+            <span class="iconclose"><ion-icon name="close"></ion-icon></span>
+            <div class="form-box login">
+                <h2>Login</h2>
+                <form action="{{ url_for('auth.login') }}" method="post">
+                    <div class="inputbox">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" placeholder="Enter E-mail" name="emails" id="emails" required>
+                    </div>
+                    <div class="inputbox">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" placeholder="Enter password" name="password" class="password" required>
+                    </div>
+                    <div class="rememberforgot">
+                        <label for=""><input type="checkbox" name="rememberMe">Rember Me</label>
+                        <a href="#"> Forgot Password</a>
+                    </div>
+                    <button type="submit" class="btn" id="btnlogin">Login</button>
+                    <div class="loginregister">
+                        <p>Don't have an account?<a href="/register" class="registerlink"> Register</a></p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    {% include 'partials/footer.html' %}
+
+    <!-- For email and password icon-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

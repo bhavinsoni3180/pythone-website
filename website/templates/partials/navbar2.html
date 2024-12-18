@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='public/css/style.css')}}">
+<div class="navbar">
+    <div class="containernav">
+        <div class="logo">
+            <a href="/adminindex"><strong>BS</strong> Photography</a>
+        </div>
+        <ul>
+            <li><a href="/adminindex" class="active">Home</a></li>
+            <li><a href="/adminindex" class="active">Contactme</a></li>
+            <li><a href="/adminindex" class="active">Bookings</a></li>
+            <li><a href="/adminviewdata" class="active">View Data</a></li>
+            {% if current_user.is_authenticated %}
+            <li><a href="/logout" class="active" id="logout">Logout</a></li>
+            {% else %}
+            <li><a href="/login" class="active" id="login">Login/SignUp</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>

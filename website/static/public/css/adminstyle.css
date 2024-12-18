@@ -1,0 +1,182 @@
+.adminheader {
+    background: linear-gradient(#00000093, #111111b4), url('./../images/adminside/adminhome.jpg');
+    background-position: 70% 30%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    min-height: 89vh;
+    /* for backgrond color & image in full page */
+    padding: 10% 5%;
+    /* for text */
+    display: flex;
+    flex-direction: column;
+    /* for keep text and everything in single coloum */
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.6rem;
+    /* gap between text*/
+    color: #fff;
+  }
+  
+  .admintitle,
+  .adminsubtitle {
+    color: #fff;
+    text-transform: uppercase;
+  }
+  
+  .adminheader .admintitle {
+    font-size: 66px;
+    font-weight: 400;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+  
+  /* photography word animation start    has removed fromend of animation ..alternate*/
+  .adminheader .admintitle .admintypewrite {
+    display: block;
+    font-size: 66px;
+    font-weight: 500;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    width: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 5s infinite;
+  }
+  
+  @keyframes typing {
+    0% {
+      width: 0px;
+    }
+  
+    90% {
+      width: 90vh;
+    }
+  
+  }
+  
+  /* photography word animation end*/
+  
+  .adminheader .adminsubtitle {
+  
+    font-weight: 500;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+  }
+  
+  .adminsocial {
+    display: flex;
+    gap: 2rem 1rem;
+  }
+  
+  .adminsocial .adminsocial-link {
+    width: 35px;
+    height: 40pxs;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    color: #777;
+    background-color: #f1f1f1;
+    cursor: pointer;
+    transition: all 1s;
+  }
+  
+  .adminsocial .adminsocial-link:hover {
+    color: #000;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+  
+  .admintable {
+    width: 100%;
+    max-width: 100%;   /* Ensures the table doesn't exceed the available width */
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; /* Ensures columns are evenly distributed */
+    word-wrap: break-word; /* Breaks long words within table cells */
+    overflow-x: auto;
+}
+
+.admintable, th, td {
+    border: 1px solid rgba(75, 70, 70, 0.589);
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: black;
+}
+
+.admintable td {
+  text-align: center;
+}
+
+.admintable td .action-icon {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.admintable td .action-icon img {
+  width: 50px;
+  height: 50px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect to make icons bigger */
+.admintable td .action-icon:hover img {
+  transform: scale(1.2);
+}
+
+/* Optional: Add margin and spacing to make icons appear clearly */
+.admintable td .action-icon {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.adminselect {
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.adminbutton {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.adminbutton:hover {
+    background-color: #45a049;
+}
+
+.admincontainer {
+  background: linear-gradient(#00000093, #111111b4), url('./../images/adminside/adminhome.jpg');
+  background-position: 70% 30%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  min-height: 89vh;
+  /* for backgrond color & image in full page */
+  padding: 3% 3%;
+  /* for text */
+  display: flow;
+  flex-direction: column;
+  /* for keep text and everything in single coloum */
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.6rem;
+  /* gap between text*/
+  color: #fff;
+}

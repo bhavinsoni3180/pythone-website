@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='public/css/register.css')}}">
+
+
+    <!-- Bootstrap JS and Popper (required for dismissal of alerts) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% include 'partials/header1.html' %}
+</head>
+
+<body>
+    {% include 'partials/navbar1.html' %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    {% if category == 'error' %}
+    <div class="alert alert-danger alert-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alert-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="loginbg">
+        <div class="wrapper">
+            <span class="iconclose"><ion-icon name="close"></ion-icon></span>
+            <div class="form-box login">
+                <h2>Registration</h2>
+                <form method="post" action="{{ url_for('auth.signup') }}">
+                    <div class="inputbox">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" placeholder="Username" id="username" name="username" value="{{ username }}">
+                    </div>
+                    <div class="inputbox">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="" placeholder="Enter E-mail" id="email" name="email" value="{{ email }}">
+                    </div>
+                    <div class="inputbox">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" placeholder="Enter password" id="password" name="password"
+                            value="{{ password }}">
+                    </div>
+                    <div class="inputbox">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" placeholder="Enter password again" id="password2" name="password2"
+                            value="{{ password2 }}">
+                    </div>
+
+                    <div class="rememberforgot">
+                        <label for=""><input type="checkbox">I agree to the terms & conditions</label>
+                    </div>
+                    <button type="submit" class="btn">Register</button>
+                    <div class="loginregister">
+                        <p>Already have an account?<a href="/login" class="loginlink"> Login</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% include 'partials/footer.html' %}
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- For email and password icon-->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

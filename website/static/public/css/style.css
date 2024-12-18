@@ -1,0 +1,761 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* popping font code
+.poppins-extralight {
+    font-family: "Poppins", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .poppins-light {
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+*/
+
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* nav bar css started */
+.navbar {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.navbar .containernav {
+  padding: 1rem 6%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: black;
+}
+
+.navbar .logo {
+  height: 30px;
+  overflow: hidden;
+}
+
+.navbar .logo a {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.navbar .logo a strong {
+  font-family: 'Jost', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.navbar ul {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar ul a {
+  font-size: 16px;
+  font-weight: 400;
+  color: #ccc;
+  text-transform: capitalize;
+  transition: all 1s;
+}
+
+.navbar ul a:hover {
+  color: #111;
+  background-color: #eee;
+  width: 100%;
+  padding: 0.30rem 0.30rem;
+  border-radius: 0.50rem;
+}
+
+/* home and header css start */
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Rubik', 'Poppins', sans-serif;
+}
+
+.header {
+  background: linear-gradient(#000, #111111bb), url('./../images/photo-header.png');
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  width: 100%;
+  min-height: 89vh;
+  /* for backgrond color & image in full page */
+  padding: 10% 5%;
+  /* for text */
+  display: flex;
+  flex-direction: column;
+  /* for keep text and everything in single coloum */
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.6rem;
+  /* gap between text*/
+  color: #fff;
+}
+
+.title,
+.subtitle {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.header .title {
+  font-size: 66px;
+  font-weight: 400;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+/* photography word animation start    has removed fromend of animation ..alternate*/
+.header .title .typewrite {
+  display: block;
+  font-size: 66px;
+  font-weight: 500;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 8px;
+  width: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 5s infinite;
+}
+
+@keyframes typing {
+  0% {
+    width: 0px;
+  }
+
+  90% {
+    width: 90vh;
+  }
+
+}
+
+/* photography word animation end*/
+
+.header .subtitle {
+
+  font-weight: 500;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.social {
+  display: flex;
+  gap: 2rem 1rem;
+}
+
+.social .social-link {
+  width: 35px;
+  height: 40pxs;
+  border-radius: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: #777;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  transition: all 1s;
+}
+
+.social .social-link:hover {
+  color: #000;
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+/* about start from here */
+section {
+  width: 100%;
+  max-width: 1600px;
+  padding: 6%;
+  min-height: 100vh;
+}
+
+section .heading .title {
+  font-size: 27px;
+  font-weight: 400;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+}
+
+section .heading .subtitle {
+  position: relative;
+  font-size: 36px;
+  font-weight: 500;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-left: 1rem;
+}
+
+section .heading .subtitle::after {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 1rem;
+  width: 35%;
+  height: 3px;
+  background-color: #333;
+}
+
+section .container {
+  padding: 2rem 6%;
+}
+
+/* about me css */
+.about .items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* for seprate text and image in different columns */
+  gap: 2rem;
+}
+
+.about .items .item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.about .items .item .content p {
+  font-size: 16px;
+  line-height: 25px;
+  padding: 1rem 0rem;
+}
+
+.about .items .item .image {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+}
+
+.about .items .item .image.image::after {
+  content: '';
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  width: 100%;
+  height: 450px;
+  background-color: #777;
+  z-index: 0;
+  width: calc(100% - 1rem);
+}
+
+.about .items .item .image img {
+  position: relative;
+  width: calc(100% - 2rem);
+  margin: 1rem;
+  height: fit-content;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* services css starts */
+
+.services {
+  background-color: #000;
+}
+
+.services .subtitle {
+  color: #fff !important;
+}
+
+.services .items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  /* for seprate text and image in different columns */
+  gap: 4rem;
+}
+
+.services .items .item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  height: 300px;
+}
+
+.services .items .item::after {
+  position: absolute;
+  content: '';
+  bottom: 0;
+  left: 50%;
+  width: 70%;
+  height: 1px;
+  background-color: #555;
+  transform: translateX(-50%);
+  transition: all 1s;
+  /* for smooth hover */
+}
+
+.services .items .item:hover:after {
+  width: 100%;
+}
+
+.services .items .item h3 {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 25px;
+  padding: 1rem 0rem;
+  color: #fff;
+  text-align: center;
+  width: fit-content;
+  padding-top: 1.6rem;
+}
+
+.services .items .item p {
+  font-size: 13px;
+  line-height: 25px;
+  padding: 1rem 0rem;
+  color: #f1f1f1;
+  text-align: center;
+}
+
+.services .items .item img {
+  position: static;
+  width: fit-content;
+  height: 60px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+/* work images all starts from here */
+.work .items {
+  padding: 2rem 0rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* for seprate image in different columns */
+  /*grid-template-rows: repeat(3,minmax(50px,1fr));*/
+  gap: 4px;
+  height: min-content;
+  background-color: #000;
+}
+
+.work .items .item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* in nth child 1 is for number of image for larg image by grid column span 2 */
+.work .items .item:nth-child(1) {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.work .items .item:nth-child(2) {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.work .items .item:nth-child(3) {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.work .items .item:nth-child(4) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.work .items .item:nth-child(5) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.work .items .item:nth-child(6) {
+  grid-column: span 3;
+  grid-row: span 1;
+}
+
+.work .items .item:nth-child(7) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.work .items .item:nth-child(8) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.work .items .item:nth-child(9) {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.work .items .item:nth-child(10) {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.work .items .item img {
+  position: static;
+  width: 100%;
+  height: fit-content;
+  min-height: 100%;
+  object-fit: cover;
+  transition: all 2s ease-out;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.work .items .item img:hover {
+  transform: scale(1.21);
+  /* increase the hover zooming */
+  opacity: 1;
+}
+
+/* contact me part start*/
+
+.contact {
+  background-color: #000;
+}
+
+.contact .items {
+  padding: 2rem 0rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* for seprate image in different columns */
+  /*grid-template-rows: repeat(3,minmax(50px,1fr));*/
+  gap: 2rem;
+}
+
+.contact .items .item .image {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  overflow: hidden;
+}
+
+.contact .items .item .image::after {
+  content: '';
+  position: absolute;
+  top: -1rem;
+  left: -1rem;
+  width: 100%;
+  height: 310px;
+  background-color: #777;
+  z-index: 0;
+  width: calc(100% - 1rem);
+}
+
+.contact .items .item .image img {
+  position: relative;
+  width: calc(100% - 2rem);
+  margin: 1rem;
+  height: fit-content;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.contact .form {
+  width: 100%;
+  border-left: 2px solid #eee;
+  padding: 2rem;
+}
+
+.contact .form form {
+  border-left: 2px solid #eee;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact .form form .contactmeemail {
+  border-bottom: 1px solid #777;
+  padding: 0.20rem 0.25rem;
+  font-size: 16px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #777;
+}
+
+.contact .form form .contactmenumber {
+  border-bottom: 1px solid #777;
+  padding: 0.20rem 0.25rem;
+  font-size: 16px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #777;
+}
+
+.contact .form form textarea {
+  color: #fff;
+}
+
+.contact .form form .contactmearea {
+  border-bottom: 1px solid #777;
+  padding: 0.6rem 0.25rem;
+  font-size: 16px;
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #777;
+  text-transform: capitalize;
+}
+
+.contact .form form .btn-contact {
+  padding: 0.25rem;
+  font-size: 16px;
+  color: #111;
+  background-color: #777;
+  border: none;
+  outline: none;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.contact .form form .btn-contact:hover {
+  background-color: rgb(255, 255, 255);
+  color: #000;
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  list-style: none;
+  padding: 2rem 0rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.contacts li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 14px;
+  font-weight: 300;
+  color: #eee;
+  cursor: pointer;
+}
+
+.contacts li i {
+  font-size: 22px;
+}
+
+.contacts li:hover {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* booking page css start */
+
+.bookingbg {
+
+  width: 100%;
+  min-height: 100vh;
+  /* for backgrond color & image in full page */
+  padding: 5% 5%;
+  /* for text */
+  display: flex;
+  /* for keep text and everything in single coloum */
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
+  /* gap between text*/
+  color: #fff;
+}
+
+.bookwrapper {
+  position: relative;
+  width: 700px;
+  height: 1130px;
+  background: transparent;
+  border: 2px solid #3c3939;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 40px #4d4242;
+  display: table-column;
+  justify-content: center;
+  align-items: center;
+  background: url('./../images/bookingbackground.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: 130% 100%;
+  /* for close button border radius */
+  transition: height .2s ease;
+  /* for js of register swap in login */
+}
+
+.bookform-box {
+  width: 100%;
+  padding: 20px;
+
+}
+
+.bookform-box h2 {
+  font-size: 2em;
+  color: #fff;
+  text-align: center;
+}
+
+.bookform-box .bookinputbox {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid;
+  margin: 20px 0;
+}
+
+.bookform-box .bookinputbox input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f1f1f1;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0 35px 0 5px;
+}
+
+.bookform-box .bookinputbox input[type="datetime-local"] {
+  background-color: #f1f1f1; /* Light grey background */
+   /* Light grey border */
+  color: #333; /* Dark grey text */
+  padding: 10px;
+  border-top-left-radius: 5px; /* Rounded corners */
+  border-top-right-radius: 5px;
+  font-size: 16px; /* Font size */
+}
+
+
+.bookform-box .bookinputbox select {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #333;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 0 35px 0 5px;
+  background-color: #f1f1f1;
+  border-top-left-radius: 5px; /* Rounded corners */
+  border-top-right-radius: 5px;
+}
+
+.bookform-box .bookinputbox input::placeholder {
+  color: #f1f1f1;
+  opacity: 1; /* Firefox */
+}
+
+.bookwrapper .bookform-box .btn{
+  width: 100%;
+  height: 45px;
+  background: #1fa731;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #fff;
+  font-weight: 500;
+}
+
+#map {
+  height: 400px; /* Adjust the height as needed */
+  width: 50%; /* Full width of its container */
+  border: 2px solid #3c3939; /* Optional: border to match the form */
+  border-radius: 8px; /* Optional: rounded corners */
+  margin-top: 20px; /* Space above the map */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Optional: shadow for depth */
+}
+
+/* footer started */
+
+footer {
+  background-color: #eee;
+  border-top: 4px solid #fff;
+  border-bottom: 4px solid #000;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem 9%;
+}
+
+footer .rights {
+  font-size: 14px;
+  color: #111;
+}
+
+footer .social {
+  font-size: 14px;
+  color: #111;
+}
+
+footer .social .s-link {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #aaa;
+  font-size: 14px;
+  color: #111;
+}
+
+footer .social .s-link:hover {
+  background-color: #111;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.notification-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notification {
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}

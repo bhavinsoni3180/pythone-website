@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include 'partials/header1.html' %}
+</head>
+
+<body>
+    {% include 'partials/navbar1.html' %}
+    <section class="work" id="work">
+        <div class="container">
+
+            <div class="heading">
+                <div class="title">
+                    Work
+                </div>
+                <div class="subtitle">
+                    My Last Work!
+                </div>
+            </div>
+
+            <div class="items">
+
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img1.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img2.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img3.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img4.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img5.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img6.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img7.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img8.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img9.jpg') }}" alt="">
+                </div>
+                <div class="item">
+                    <img src="{{ url_for('static', filename='public/images/clicks/img10.jpg') }}" alt="">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="contact" id="contact">
+        <div class="container">
+
+            <div class="heading">
+                <div class="title">
+                    Contact
+                </div>
+                <div class="subtitle">
+                    Contact with me
+                </div>
+            </div>
+
+            <div class="items">
+
+                <div class="item">
+                    <div class="form">
+                        <form method="post" action="{{ url_for('auth.contact') }}">
+                            <!-- Display error messages -->
+                            {% with messages = get_flashed_messages(with_categories=true) %}
+                                {% if messages %}
+                                    <ul class="flashes">
+                                        {% for category, message in messages %}
+                                            <li class="flash {{ category }}">{{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% endwith %}
+                            <input type="hidden" id="userid" name="userid" value="{{ current_user.id }}">
+                            <input type="email" class="contactmeemail" id="contactmeemail" name="contactmeemail"
+                                placeholder="Enter Your E-Mail!">
+                            <input type="tel" class="contactmenumber" id="contactmenumber" name="contactmenumber"
+                                placeholder="Enter Your Contact !">
+                            <textarea class="contactmearea" id="contactmearea" name="contactmearea" cols="30" rows="10"
+                                placeholder="Describe your Requirement">
+                            </textarea>
+                            <button class="btn-contact"> Contact </button>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="image">
+                        <img src="{{ url_for('static', filename='public/images/clicks/img6.jpg') }}" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <ul class="contacts">
+                <li><span><i class="fa fa-phone"></i></span> (+64) 22 583 6996</li>
+                <li><span><i class="fa fa-envelope"></i></span> bhavin.soni3180@gmail.com</li>
+            </ul>
+
+        </div>
+    </section>
+    {% include 'partials/footer.html' %}
+</body>
+
+</html>
