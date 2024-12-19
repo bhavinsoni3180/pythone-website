@@ -2,7 +2,7 @@
 
 # website-python
 
-# practice site of python
+# site of python
 
 # pythone-website
 
