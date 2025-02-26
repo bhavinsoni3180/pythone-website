@@ -1,3 +1,4 @@
 <<<<<<< HEAD
-Photography Website Developed on Pyithon
-> > > > > > > 3132cb4277c6fca319be074c828d14457f439b07
+Photography Website Developed on Python
+> > > > > > > 
+This Website is developed in python for photography people.
