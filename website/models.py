@@ -47,3 +47,24 @@ class BookingShoot(db.Model):
     contactnumber = db.Column(db.BigInteger, nullable=True)
 
     user = db.relationship('User', backref=db.backref('bookingshoots', lazy=True))
+
+class Gallery(db.Model):
+    __tablename__ = 'gallery'
+    galleryid = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    user_type = db.Column(db.String(15), nullable=False)
+    username = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=True)
+    category = db.Column(db.String(50), nullable=True)
+    visibility = db.Column(db.Enum('public', 'private', 'clients'), nullable=False, default='public')
+    views = db.Column(db.Integer, nullable=False, default=0)
+    client_name = db.Column(db.String(100), nullable=True)
+    media_type = db.Column(db.String(10), nullable=False)  # 'image' or 'video'
+    media_path = db.Column(db.String(500), nullable=False)
+    uploaded_at = db.Column(db.DateTime, nullable=False, server_default=db.func.current_timestamp())
+    
+    user = db.relationship('User', backref=db.backref('gallery', lazy=True))
+
+def __repr__(self):
+    return f'<Gallery {self.galleryid}>'

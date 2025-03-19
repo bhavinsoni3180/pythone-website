@@ -18,7 +18,7 @@
             <select name="table_name" id="table_name" class="adminselect">
                 <option value="" disabled selected>Select a table</option>
                 <option value="User">User</option>
-                <option value="Image">Image</option>
+                <option value="Gallery">Gallery</option>
                 <option value="ContactMe">ContactMe</option>
                 <option value="BookingShoot">BookingShoot</option>
             </select>
@@ -38,8 +38,8 @@
             </thead>
             <tbody>
                 {% for row in table_data %}
-                    <tr id="row_{{ row.id }}">
-                        <form method="POST" action="{{ url_for('views.update_data', table=selected_table, row_id=row.id) }}">
+                    <tr id="row_{{ row.id if row.id else row.user_id }}">
+                        <form method="POST" action="{{ url_for('views.update_data', table=selected_table, row_id=row.id if row.id else row.user_id) }}">
                             {% for column in columns %}
                                 <td>
                                     <input type="text" name="{{ column }}" value="{{ getattr(row, column) }}">
@@ -49,7 +49,7 @@
                                 <button type="submit" class="action-icon">
                                     <img src="{{ url_for('static', filename='public/images/adminside/icons/edit.png') }}" alt="Save" width="20">
                                 </button>
-                                <a class="action-icon" href="{{ url_for('views.delete_data', table=selected_table, row_id=row.id) }}">
+                                <a class="action-icon" href="{{ url_for('views.delete_data', table=selected_table, row_id=row.id if row.id else row.user_id) }}">
                                     <img src="{{ url_for('static', filename='public/images/adminside/icons/delete.png') }}" alt="Delete" width="20">
                                 </a>
                             </td>

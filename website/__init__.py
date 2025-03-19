@@ -4,11 +4,13 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager
 from os import path
+import os
 
 
 db = SQLAlchemy()
 DB_NAME = "photodb.db"
 login_manager = LoginManager()
+
 
 
 def create_app():
@@ -18,6 +20,12 @@ def create_app():
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(hours=1)  # Set session timeout to 1 hour
     app.config['REMEMBER_COOKIE_DURATION'] = timedelta(hours=1)  # Set the duration of the 'remember me' cookie
     #app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(hours=1)
+    
+    # Configure UPLOAD_FOLDER
+    UPLOAD_FOLDER = os.path.join(os.getcwd(), 'static', 'uploads')
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)  # Ensure the directory exists
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER  # Set upload folder in app config
+    
     db.init_app(app)
 
      # Initialize Flask-Login
@@ -35,7 +43,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     
-    from .models import User, Image, ContactMe, BookingShoot
+    from .models import User, Image, ContactMe, BookingShoot, Gallery
 
     create_database(app)
 

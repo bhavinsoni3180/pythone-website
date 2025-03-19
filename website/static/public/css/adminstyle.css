@@ -180,3 +180,83 @@ th {
   /* gap between text*/
   color: #fff;
 }
+
+.admingallery {
+  background: linear-gradient(#00000093, #111111b4), url('./../images/adminside/adminhome.jpg');
+  background-position: 70% 30%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  min-height: 89vh;
+  /* for backgrond color & image in full page */
+  padding: 10% 5%;
+  /* for text */
+  display: flex;
+  flex-direction: column;
+  /* for keep text and everything in single coloum */
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.6rem;
+  /* gap between text*/
+  color: #fff;
+}
+
+.adminimageupload {
+  background: linear-gradient(#00000093, #111111b4), url('./../images/adminside/adminhome.jpg');
+  background-position: 70% 30%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100%;
+  min-height: 89vh;
+  /* for backgrond color & image in full page */
+  padding: 10% 5%;
+  /* for text */
+  display: flex;
+  flex-direction: column;
+  /* for keep text and everything in single coloum */
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.6rem;
+  /* gap between text*/
+  color: #fff;
+}
+
+.upload-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.form-group {
+  margin-bottom: 15px;
+}
+.labelimage {
+  font-weight: bold;
+  color: black;
+}
+.inputimage, .selectimage, .textareaimage {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.Imageupload {
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.Imageupload  :hover {
+  background-color: #218838;
+}
+
+.imageh2 {
+color: black;
+}
