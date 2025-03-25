@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% include 'partials/header1.html' %}
+            
+</head>
+
+<body>
+    {% include 'partials/navbar2.html' %}
+    
+    <header class="adminheader" id="adminhome">
+        <div class="uploadimagecontainer">
+            <h2 class="imageuplodeh2">Upload Image/Video</h2>
+            <form action="{{ url_for('views.upload_media') }}" method="POST" enctype="multipart/form-data">
+                <div class="formimagegroup">
+                    <label class="imageuplodelable" for="title">Title</label>
+                    <input class="inputimage" type="text" name="title" id="title" required>
+                </div>
+                <div class="formimagegroup">
+                    <label class="imageuplodelable" for="description">Description</label>
+                    <textarea class="imagetextarea" name="description" id="description"></textarea>
+                </div>
+                <div class="formimagegroup">
+                    <label class="imageuplodelable" for="category">Category</label>
+                    <input class="inputimage" type="text" name="category" id="category">
+                </div>
+                <div class="formimagegroup">
+                    <label class="imageuplodelable" for="visibility">Visibility</label>
+                    <select class="imageselect" name="visibility" id="visibility" required>
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                        <option value="clients">Clients Only</option>
+                    </select>
+                </div>
+                <div class="formimagegroup">
+                    <label class="imageuplodelable" for="client_name">Client Name (Optional)</label>
+                    <input class="inputimage" type="text" name="client_name" id="client_name">
+                </div>
+                <div class="formimagegroup">
+                    <label class="imageuplodelable" for="media_type">Media Type</label>
+                    <select class="imageselect" name="media_type" id="media_type" required>
+                        <option value="image">Image</option>
+                        <option value="video">Video</option>
+                    </select>
+                </div>
+                <div class="formimagegroup">
+                    <label class="imageuplodelable" for="file">Upload File</label>
+                    <input class="inputimage" type="file" name="file" id="file" required>
+                </div>
+                <button class="imageuplodebutton" type="submit">Upload</button>
+            </form>
+        </div>
+    </header>
+    
+    {% include 'partials/footer.html' %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let fileInput = document.getElementById('file');
+            let titleInput = document.getElementById('title');
+    
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length > 0) {
+                    titleInput.value = fileInput.files[0].name; // Set filename in Title input
+                }
+            });
+        });
+    </script>
+    
+</body>
+
+</html>

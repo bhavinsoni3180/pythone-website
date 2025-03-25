@@ -180,3 +180,61 @@ th {
   /* gap between text*/
   color: #fff;
 }
+
+.uploadimagecontainer {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formimagegroup {
+  margin-bottom: 15px;
+}
+
+.inputimage, .imageselect, .imagetextarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: black;
+}
+
+.imageuplodelable {
+  color: black;
+}
+
+.imageuplodeh2 {
+  color: brown;
+  text-align: center;
+}
+
+.imageuplodebutton{
+  display: block;
+    width: 100%; /* Full width of form */
+    max-width: 300px; /* Prevents it from being too large */
+    margin: 10px auto; /* Centers it */
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    background-color: #007bff; /* Blue color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.imageuplodebutton:hover {
+  background-color: #0056b3; /* Darker blue */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.imageuplodebutton:active {
+  background-color: #003f7f; /* Even darker blue */
+  transform: scale(0.98);
+}

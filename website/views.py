@@ -1,9 +1,12 @@
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
 from flask_login import current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from sqlalchemy import inspect
-from .models import User, Image, ContactMe, BookingShoot
+from .models import User, Image, ContactMe, BookingShoot, Gallery
+import os
+from werkzeug.utils import secure_filename
+
 
 views = Blueprint('views', __name__)
 
@@ -48,7 +51,7 @@ def adminviewdata():
 
 def show_table_data():
     # List all the table names dynamically
-    tables = ['User', 'Image', 'ContactMe', 'BookingShoot']  # List of tables you want to support
+    tables = ['User', 'Gallery', 'ContactMe', 'BookingShoot']  # List of tables you want to support
     table_data = None
     columns = None
     selected_table = None
@@ -61,8 +64,8 @@ def show_table_data():
         # Dynamically select table class
         if selected_table == 'User':
             model = User
-        elif selected_table == 'Image':
-            model = Image
+        elif selected_table == 'Gallery':
+            model = Gallery
         elif selected_table == 'ContactMe':
             model = ContactMe
         elif selected_table == 'BookingShoot':
@@ -89,8 +92,8 @@ def update_data(table, row_id):
     model = None
     if table == 'User':
         model = User
-    elif table == 'Image':
-        model = Image
+    elif table == 'Gallery':
+        model = Gallery
     elif table == 'ContactMe':
         model = ContactMe
     elif table == 'BookingShoot':
@@ -121,8 +124,8 @@ def delete_data(table, row_id):
     model = None
     if table == 'User':
         model = User
-    elif table == 'Image':
-        model = Image
+    elif table == 'Gallery':
+        model = Gallery
     elif table == 'ContactMe':
         model = ContactMe
     elif table == 'BookingShoot':
@@ -136,3 +139,52 @@ def delete_data(table, row_id):
             db.session.commit()
         return redirect(url_for('views.adminviewdata'))
     return "Table not found", 404
+
+@views.route('/adminimageupload')
+
+def adminimageupload():
+    return render_template('adminimageupload.html')
+
+
+@views.route('/upload_media', methods=['POST'])
+@login_required  # If only admins can upload, add this decorator
+def upload_media():
+    if request.method == 'POST':
+        title = request.form.get('title')
+        description = request.form.get('description')
+        category = request.form.get('category')
+        visibility = request.form.get('visibility')
+        client_name = request.form.get('client_name')
+        media_type = request.form.get('media_type')
+        file = request.files.get('file')
+
+        if not file:
+            flash("No file selected", "error")
+            return redirect(url_for('views.adminimageupload'))
+
+        allowed_extensions = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'avi', 'mov', 'mkv'}
+        if '.' not in file.filename or file.filename.split('.')[-1].lower() not in allowed_extensions:
+            flash("Invalid file type", "error")
+            return redirect(url_for('views.adminimageupload'))
+
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)  # FIXED
+        file.save(file_path)  # FIXED
+
+        new_media = Gallery(  # ✅ Use 'Gallery' instead of 'Image'
+            user_id=current_user.id,  
+            user_type=current_user.type,  
+            username=current_user.username,  
+            title=title,
+            description=description,
+            category=category,
+            visibility=visibility,
+            client_name=client_name,
+            media_type=media_type,
+            media_path=file_path  # ✅ 'file_path' should match 'media_path'
+        )
+        db.session.add(new_media)
+        db.session.commit()
+
+        flash("File uploaded successfully!", "success")
+        return redirect(url_for('views.adminimageupload'))
