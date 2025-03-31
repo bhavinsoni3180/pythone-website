@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Gallery</title>
+    {% include 'partials/header1.html' %}
+
+</head>
+
+<body>
+    {% include 'partials/navbar2.html' %}
+    
+    <header id="adminhome">
+        <div class="gallery-container">
+            {% for image in images %}
+            <div class="gallery-item" onclick="openModal('{{ url_for('static', filename=image.media_path) }}')">
+                {% if image.media_type == 'image' %}
+                <img src="{{ url_for('static', filename=image.media_path) }}" alt="{{ image.title }}">
+                {% elif image.media_type == 'video' %}
+                <video controls>
+                    <source src="{{ url_for('static', filename=image.media_path) }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Modal for Full Image View -->
+        <div class="modal" id="imageModal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <img id="modalImage" src="" alt="Full View">
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            {% if prev_url %}
+                <a href="{{ prev_url }}">Previous</a>
+            {% endif %}
+            {% if next_url %}
+                <a href="{{ next_url }}">Next</a>
+            {% endif %}
+        </div>
+    </header>
+
+    {% include 'partials/footer.html' %}
+    
+    <script>
+        function openModal(imageSrc) {
+            document.getElementById("modalImage").src = imageSrc;
+            document.getElementById("imageModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
+    
+</body>
+</html>

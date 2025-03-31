@@ -147,7 +147,7 @@ def adminimageupload():
 
 
 @views.route('/upload_media', methods=['POST'])
-@login_required  # If only admins can upload, add this decorator
+@login_required  # If only admins can upload, added this.
 def upload_media():
     if request.method == 'POST':
         title = request.form.get('title')
@@ -168,10 +168,14 @@ def upload_media():
             return redirect(url_for('views.adminimageupload'))
 
         filename = secure_filename(file.filename)
-        file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)  # FIXED
-        file.save(file_path)  # FIXED
+        # upload path inside 'static/uploads/'
+        upload_folder = os.path.join(current_app.root_path, 'static', 'uploads')
+        os.makedirs(upload_folder, exist_ok=True)  # Ensure the folder exists
 
-        new_media = Gallery(  # ✅ Use 'Gallery' instead of 'Image'
+        file_path = os.path.join(upload_folder, filename)  # Full path of image or video
+        file.save(file_path)  # Save file in 'static/uploads/' which is relative path.
+
+        new_media = Gallery(  # Use 'Gallery' for image and video storage.
             user_id=current_user.id,  
             user_type=current_user.type,  
             username=current_user.username,  
@@ -181,10 +185,23 @@ def upload_media():
             visibility=visibility,
             client_name=client_name,
             media_type=media_type,
-            media_path=file_path  # ✅ 'file_path' should match 'media_path'
+            media_path=f'uploads/{filename}'  # Store relative path for images
         )
         db.session.add(new_media)
         db.session.commit()
 
         flash("File uploaded successfully!", "success")
         return redirect(url_for('views.adminimageupload'))
+    
+@views.route('/admingallery')
+@login_required
+def admingallery():
+    page = request.args.get('page', 1, type=int)
+    per_page = 16  # Show 16 images per page
+    pagination = Gallery.query.filter(Gallery.media_type.in_(['image', 'video'])).paginate(page=page, per_page=per_page, error_out=False)
+
+    images = pagination.items
+    next_url = url_for('views.admingallery', page=pagination.next_num) if pagination.has_next else None
+    prev_url = url_for('views.admingallery', page=pagination.prev_num) if pagination.has_prev else None
+
+    return render_template('admingallery.html', images=images, next_url=next_url, prev_url=prev_url)

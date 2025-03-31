@@ -57,11 +57,12 @@ class Gallery(db.Model):
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, nullable=True)
     category = db.Column(db.String(50), nullable=True)
-    visibility = db.Column(db.Enum('public', 'private', 'clients'), nullable=False, default='public')
-    views = db.Column(db.Integer, nullable=False, default=0)
+    visibility = db.Column(db.Enum('public', 'private', 'clients', name='visibility_enum'), nullable=False, server_default='public')
+    views = db.Column(db.Integer, nullable=True, default=0)
     client_name = db.Column(db.String(100), nullable=True)
-    media_type = db.Column(db.String(10), nullable=False)  # 'image' or 'video'
+    media_type = db.Column(db.Enum('image', 'video', name='media_type_enum'), nullable=False)
     media_path = db.Column(db.String(500), nullable=False)
     uploaded_at = db.Column(db.DateTime, nullable=False, server_default=db.func.current_timestamp())
     
     user = db.relationship('User', backref=db.backref('gallery', lazy=True))
+    
