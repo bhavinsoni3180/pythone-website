@@ -6,3 +6,4 @@ Photography Website Developed on Python
 > > > > > > > ADMIN : bhavin3180@gmail.com
 > > > > > > > CLIENT : bhavin123@gmail.com
 > > > > > > > Password : 1234
+> > > > > > > these are the users for login.
