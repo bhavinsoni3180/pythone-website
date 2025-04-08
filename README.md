@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # website-python
 
@@ -17,3 +18,10 @@ Password : 1234
 > > > > > > >
 > > > > > > > This Website is developed in python for photography people.
 > > > > > > > f472e02fb84bea6208d176f0c791f6e30adfab6b
+=======
+Photography Website Developed on Python
+> > > > > > > 
+This Website is developed in python for photography people.
+
+This is a change.
+>>>>>>> 016b67e22353d43980838d876d4d03d59f923767
