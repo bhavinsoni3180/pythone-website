@@ -7,4 +7,4 @@ Photography Website Developed on Python
 > > > > > > > CLIENT : bhavin123@gmail.com
 > > > > > > > Password : 1234
 > > > > > > > these are the users for login.
-> > > > > > > for commits must check Master branch not main branch.
+> > > > > > > for commits must check Master branch not main branch. My all commits comes under Master branch.
