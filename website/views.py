@@ -32,7 +32,15 @@ def booking():
 @views.route('/clientgallery')
 @login_required
 def clientgallery():
-    return render_template('clientgallery.html')
+    page = request.args.get('page', 1, type=int)
+    per_page = 16  # or any number you like
+    pagination = Gallery.query.filter(Gallery.media_type.in_(['image', 'video'])).paginate(page=page, per_page=per_page, error_out=False)
+
+    images = pagination.items
+    next_url = url_for('views.clientgallery', page=pagination.next_num) if pagination.has_next else None
+    prev_url = url_for('views.clientgallery', page=pagination.prev_num) if pagination.has_prev else None
+
+    return render_template('clientgallery.html', images=images, next_url=next_url, prev_url=prev_url)
 
 @views.route('/adminindex')
 @login_required
