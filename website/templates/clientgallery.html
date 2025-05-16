@@ -34,3 +34,14 @@
                 <img id="modalImage" src="" alt="Full View">
             </div>
         </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            {% if prev_url %}
+                <a href="{{ prev_url }}">Previous</a>
+            {% endif %}
+            {% if next_url %}
+                <a href="{{ next_url }}">Next</a>
+            {% endif %}
+        </div>
+    </header>
