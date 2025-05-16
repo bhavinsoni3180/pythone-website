@@ -12,7 +12,7 @@
 <body>
     {% include 'partials/navbar2.html' %}
 
-    <header id="adminhome">
+    <main id="adminhome">
         <div class="gallery-container-client">
             {% for image in images %}
             <div class="gallery-item-client" onclick="openModal('{{ url_for('static', filename=image.media_path) }}')">
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Modal for Full Image View -->
-        <div class="modal-client" id="mediaModal">
+        <div class="modal-client" id="mediaModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
             <div class="modal-content-client">
                 <span class="close-btn-client" onclick="closeModal()">&times;</span>
                 <img id="modalImage" src="" alt="Full View" style="display: none;">
@@ -49,7 +49,7 @@
             <a href="{{ next_url }}">Next</a>
             {% endif %}
         </div>
-    </header>
+    </main>
 
     {% include 'partials/footer.html' %}
 
