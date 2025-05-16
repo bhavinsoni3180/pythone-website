@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,7 @@
 
 <body>
     {% include 'partials/navbar2.html' %}
-    
+
     <header id="adminhome">
         <div class="gallery-container">
             {% for image in images %}
@@ -28,36 +29,56 @@
         </div>
 
         <!-- Modal for Full Image View -->
-        <div class="modal" id="imageModal">
+        <div class="modal" id="mediaModal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeModal()">&times;</span>
-                <img id="modalImage" src="" alt="Full View">
+                <img id="modalImage" src="" alt="Full View" style="display: none;">
+                <video id="modalVideo" controls style="display: none;">
+                    <source id="modalVideoSource" src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
 
         <!-- Pagination -->
         <div class="pagination">
             {% if prev_url %}
-                <a href="{{ prev_url }}">Previous</a>
+            <a href="{{ prev_url }}">Previous</a>
             {% endif %}
             {% if next_url %}
-                <a href="{{ next_url }}">Next</a>
+            <a href="{{ next_url }}">Next</a>
             {% endif %}
         </div>
     </header>
 
     {% include 'partials/footer.html' %}
-    
+
     <script>
-        function openModal(imageSrc) {
-            document.getElementById("modalImage").src = imageSrc;
-            document.getElementById("imageModal").style.display = "flex";
+        function openModal(mediaSrc) {
+            const modal = document.getElementById("mediaModal");
+            const modalImage = document.getElementById("modalImage");
+            const modalVideo = document.getElementById("modalVideo");
+            const modalVideoSource = document.getElementById("modalVideoSource");
+
+            if (mediaSrc.endsWith(".mp4") || mediaSrc.endsWith(".mov") || mediaSrc.endsWith(".avi")) {
+                modalImage.style.display = "none";
+                modalVideo.style.display = "block";
+                modalVideoSource.src = mediaSrc;
+                modalVideo.load();
+            } else {
+                modalVideo.style.display = "none";
+                modalImage.style.display = "block";
+                modalImage.src = mediaSrc;
+            }
+            modal.style.display = "flex";
         }
 
         function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
+            document.getElementById("mediaModal").style.display = "none";
+            document.getElementById("modalVideo").pause();  // stop video on close
         }
     </script>
-    
+
 </body>
+
 </html>
