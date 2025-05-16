@@ -29,6 +29,11 @@ def workcontact():
 def booking():
     return render_template('booking.html')
 
+@views.route('/clientgallery')
+@login_required
+def clientgallery():
+    return render_template('clientgallery.html')
+
 @views.route('/adminindex')
 @login_required
 def adminindex():
