@@ -761,14 +761,14 @@ footer .social .s-link:hover {
 }
 
 /* client side css */
-.gallery-container {
+.gallery-container-client {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 15px;
     padding: 20px;
 }
 
-.gallery-item {
+.gallery-item-client {
     cursor: pointer;
     overflow: hidden;
     border-radius: 10px;
@@ -776,12 +776,12 @@ footer .social .s-link:hover {
     transition: transform 0.3s;
 }
 
-.gallery-item:hover {
+.gallery-item-client:hover {
     transform: scale(1.02);
 }
 
-.gallery-item img,
-.gallery-item video {
+.gallery-item-client img,
+.gallery-item-client video {
     width: 100%;
     height: auto;
     display: block;
@@ -789,7 +789,7 @@ footer .social .s-link:hover {
 }
 
 /* Modal Styles */
-.modal {
+.modal-client {
     display: none;
     position: fixed;
     z-index: 1000;
@@ -800,23 +800,42 @@ footer .social .s-link:hover {
     align-items: center;
 }
 
-.modal-content {
+.modal-content-client {
     position: relative;
     max-width: 90%;
     max-height: 90%;
 }
 
-.modal-content img,
-.modal-content video {
+.modal-content-client img,
+.modal-content-client video {
     width: 100%;
     height: auto;
     border-radius: 10px;
 }
 
-.close-btn {
+.close-btn-client {
     position: absolute;
     top: 10px; right: 20px;
     font-size: 30px;
     color: #fff;
     cursor: pointer;
+}
+
+/* responsive gallery */
+@media (max-width: 768px) {
+  .gallery-container-client {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    padding: 1rem;
+    gap: 10px;
+  }
+
+  .modal-content-client {
+    max-width: 95%;
+    max-height: 90%;
+  }
+
+  .close-btn-client {
+    top: 10px;
+    right: 10px;
+  }
 }
