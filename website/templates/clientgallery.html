@@ -45,3 +45,19 @@
             {% endif %}
         </div>
     </header>
+
+    {% include 'partials/footer.html' %}
+    
+    <script>
+        function openModal(imageSrc) {
+            document.getElementById("modalImage").src = imageSrc;
+            document.getElementById("imageModal").style.display = "flex";
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+    </script>
+    
+</body>
+</html>
