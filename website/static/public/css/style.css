@@ -98,13 +98,12 @@
 }
 
 .nav2-item {
-  position: relative;
+  position: relative; 
 }
 
 .nav2-item a {
   color: white;
   text-decoration: none;
-  padding: 10px;
   display: block;
 }
 
@@ -116,7 +115,7 @@
 
 /* Dropdown submenu */
 .dropdown-menu-nav2 {
-  display: none;
+  display:inline-block;
   position: absolute;
   background-color: #444;
   min-width: 160px;
@@ -127,12 +126,12 @@
 
 .dropdown-menu-nav2 li a {
   color: white;
-  padding: 10px;
-  display: block;
+  display:block;
 }
 
 .dropdown:hover .dropdown-menu-nav2 {
   display: block;
+  padding: 10px;
 }
 
 /* close dropdown on outside click for mobile */
