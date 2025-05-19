@@ -115,7 +115,7 @@
 
 /* Dropdown submenu */
 .dropdown-menu-nav2 {
-  display:inline-block;
+  display:block;
   position: absolute;
   background-color: #444;
   min-width: 160px;
