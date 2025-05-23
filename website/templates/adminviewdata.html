@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% include 'partials/header1.html' %}
-        <title>Bhavin Lodhiya</title>
-        
+    <title>Bhavin Lodhiya</title>
+
 </head>
 
 <body>
     {% include 'partials/navbar2.html' %}
-    
+
     <div class="admincontainer">
         <!-- Dropdown for selecting table -->
         <form action="{{ url_for('views.show_table_data') }}" method="POST">
@@ -27,43 +27,49 @@
 
         {% if table_data %}
         <h2>Data from table: {{ selected_table }}</h2>
-        <table border="1" class="admintable">
-            <thead>
-                <tr>
-                    {% for column in columns %}
+        <div class="table-responsive">
+            <table border="1" class="admintable">
+                <thead>
+                    <tr>
+                        {% for column in columns %}
                         <th>{{ column }}</th>
-                    {% endfor %}
-                    <th>Modify</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in table_data %}
+                        {% endfor %}
+                        <th>Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in table_data %}
                     <tr id="row_{{ row.id }}">
-                        <form method="POST" action="{{ url_for('views.update_data', table=selected_table, row_id=row.id if row.id else row.user_id) }}">
+                        <form method="POST"
+                            action="{{ url_for('views.update_data', table=selected_table, row_id=row.id if row.id else row.user_id) }}">
                             {% for column in columns %}
-                                <td>
-                                    <input type="text" name="{{ column }}" value="{{ getattr(row, column) }}">
-                                </td>
+                            <td>
+                                <input type="text" name="{{ column }}" value="{{ getattr(row, column) }}">
+                            </td>
                             {% endfor %}
                             <td>
                                 <button type="submit" class="action-icon">
-                                    <img src="{{ url_for('static', filename='public/images/adminside/icons/edit.png') }}" alt="Save" width="20">
+                                    <img src="{{ url_for('static', filename='public/images/adminside/icons/edit.png') }}"
+                                        alt="Save" width="20">
                                 </button>
-                                <a class="action-icon" href="{{ url_for('views.delete_data', table=selected_table, row_id=row.id if row.id else row.user_id) }}">
-                                    <img src="{{ url_for('static', filename='public/images/adminside/icons/delete.png') }}" alt="Delete" width="20">
+                                <a class="action-icon"
+                                    href="{{ url_for('views.delete_data', table=selected_table, row_id=row.id if row.id else row.user_id) }}">
+                                    <img src="{{ url_for('static', filename='public/images/adminside/icons/delete.png') }}"
+                                        alt="Delete" width="20">
                                 </a>
                             </td>
                         </form>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {% endif %}
 
     </div>
-    
+
     {% include 'partials/footer.html' %}
-    
+
 </body>
 
 </html>

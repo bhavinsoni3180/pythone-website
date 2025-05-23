@@ -4,8 +4,15 @@
         <div class="logo">
             <a href="/adminindex"><strong>BS</strong> Photography</a>
         </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
         <ul class="nav2-list">
-            <li class="nav2-item dropdown"><a href="#">Home <span class="arrow">&#9662;</span></a>
+            <li class="nav2-item dropdown"><a href="#" aria-haspopup="true" aria-expanded="false">Home <span
+                        class="arrow">&#9662;</span></a>
+                </a>
                 <ul class="dropdown-menu-nav2">
                     <li><a href="/adminindex" class="active">Home</a></li>
                     <li><a href="/" class="active">Client side Home</a></li>
@@ -37,10 +44,21 @@
         document.addEventListener('click', (e) => {
             const isDropdown = e.target.closest('.dropdown');
             if (!isDropdown) {
-                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                document.querySelectorAll('.dropdown-menu-nav2').forEach(menu => {
                     menu.style.display = 'none';
                 });
             }
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.getElementById("mobile-menu");
+        const nav = document.querySelector(".navbar ul");
+
+        menuToggle.addEventListener("click", () => {
+            nav.classList.toggle("active");
         });
     });
 </script>

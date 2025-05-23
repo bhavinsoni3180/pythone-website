@@ -26,7 +26,7 @@
   }
   
   .adminheader .admintitle {
-    font-size: 66px;
+    font-size: clamp(32px, 6vw, 66px); /* For Text Responsive */
     font-weight: 400;
     color: #fff;
     text-transform: uppercase;
@@ -36,7 +36,7 @@
   /* photography word animation start    has removed fromend of animation ..alternate*/
   .adminheader .admintitle .admintypewrite {
     display: block;
-    font-size: 66px;
+    font-size: clamp(28px, 5vw, 60px); /* For Text Responsive */
     font-weight: 500;
     color: #fff;
     text-transform: uppercase;
@@ -75,7 +75,7 @@
   
   .adminsocial .adminsocial-link {
     width: 35px;
-    height: 40pxs;
+    height: 40px;
     border-radius: 3px;
     display: flex;
     justify-content: center;
@@ -93,6 +93,11 @@
     border-radius: 50%;
   }
   
+  .table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  }
+
   .admintable {
     width: 100%;
     max-width: 100%;   /* Ensures the table doesn't exceed the available width */
@@ -317,4 +322,65 @@ th {
 }
 .pagination a:hover {
   background: #0056b3;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .adminheader {
+    align-items: center;
+    padding: 20% 5%;
+    text-align: center;
+  }
+
+  .adminsocial {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .adminsocial .adminsocial-link {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile/tablets */
+  }
+
+  .adminheader .admintitle,
+  .adminheader .adminsubtitle {
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: repeat(1, 1fr); /* 1 column for small devices */
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .imageuplodebutton {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+
+  .admintable td img {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    max-width: 95%;
+    padding: 10px;
+  }
+
+  .modal img {
+    max-height: 60vh;
+  }
 }
