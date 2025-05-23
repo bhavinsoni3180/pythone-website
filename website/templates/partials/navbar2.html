@@ -51,3 +51,14 @@
         });
     });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const menuToggle = document.getElementById("mobile-menu");
+        const nav = document.querySelector(".navbar ul");
+
+        menuToggle.addEventListener("click", () => {
+            nav.classList.toggle("active");
+        });
+    });
+</script>
