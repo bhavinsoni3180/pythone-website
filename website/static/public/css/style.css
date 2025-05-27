@@ -889,7 +889,7 @@ footer .social .s-link:hover {
   transition: 0.3s;
 }
 
-/* Responsive Nav */
+/* Responsive Nav css */
 @media screen and (max-width: 768px) {
   .navbar ul {
     flex-direction: column;
