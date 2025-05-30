@@ -219,7 +219,7 @@ def admingallery():
 
      # Convert SQLAlchemy objects to dictionaries
     image_dicts = [{
-        'id': img.id,
+        'id': img.galleryid,
         'title': img.title,
         'description': img.description,
         'client_name': img.client_name,
