@@ -217,4 +217,41 @@ def admingallery():
     next_url = url_for('views.admingallery', page=pagination.next_num) if pagination.has_next else None
     prev_url = url_for('views.admingallery', page=pagination.prev_num) if pagination.has_prev else None
 
-    return render_template('admingallery.html', images=images, next_url=next_url, prev_url=prev_url)
+     # Convert SQLAlchemy objects to dictionaries
+    image_dicts = [{
+        'id': img.id,
+        'title': img.title,
+        'description': img.description,
+        'client_name': img.client_name,
+        'media_type': img.media_type,
+        'media_path': img.media_path,
+        'user_id': img.user_id,
+        'username': img.username
+    } for img in images]
+
+    return render_template('admingallery.html', images=image_dicts, next_url=next_url, prev_url=prev_url)
+
+@views.route('/admin_gallery_modal')
+@login_required
+def admin_gallery_modal():
+    if current_user.type != 'admin':
+        flash("Access denied", "error")
+        return redirect(url_for('views.home'))
+
+    page = request.args.get('page', 1, type=int)
+    per_page = 16
+    pagination = Gallery.query.paginate(page=page, per_page=per_page, error_out=False)
+
+    images = pagination.items
+    next_url = url_for('views.admin_gallery_modal', page=pagination.next_num) if pagination.has_next else None
+    prev_url = url_for('views.admin_gallery_modal', page=pagination.prev_num) if pagination.has_prev else None
+
+    return render_template('admin_gallery_modal.html', images=images, next_url=next_url, prev_url=prev_url)
+
+@views.route('/delete/gallery/<int:gallery_id>', methods=['GET'])
+def delete_gallery_item(gallery_id):
+    gallery_item = Gallery.query.get(gallery_id)
+    if gallery_item:
+        db.session.delete(gallery_item)
+        db.session.commit()
+    return redirect(url_for('views.admin_gallery_modal'))

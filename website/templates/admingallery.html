@@ -60,13 +60,27 @@
     {% include 'partials/footer.html' %}
 
     <script>
-        const images = {{ images| tojson }};
-        function openModal(id) {
-            const selected = images.find(img => img.galleryid === id);
+        (function () {
+            const images = {{ images | tojson | safe
+        }};
+
+        window.openModal = function (id) {
+            const selected = images.find(img => img.galleryid == id); // Use == to match string vs int
+
+            // ✅ Debug logs here
+            console.log('ID clicked:', id);
+            console.log('Images:', images);
+            console.log('Found:', selected);
+
             const modal = document.getElementById("imageModal");
             const modalMedia = document.getElementById("modalMedia");
             const viewBtn = document.getElementById("viewBtn");
             const deleteBtn = document.getElementById("deleteBtn");
+
+            if (!selected) {
+                alert('Media not found');
+                return;
+            }
 
             if (selected.media_type === "image") {
                 modalMedia.innerHTML = `<img src="/static/${selected.media_path}" alt="${selected.title}">`;
@@ -77,11 +91,19 @@
             viewBtn.href = `/adminviewdata?highlight_id=${selected.galleryid}`;
             deleteBtn.href = `/delete/Gallery/${selected.galleryid}`;
             modal.style.display = "flex";
-        }
+        };
 
-        function closeModal() {
+        window.closeModal = function () {
             document.getElementById("imageModal").style.display = "none";
-        }
+        };
+    }) ();
+
+        deleteBtn.onclick = function () {
+            if (confirm("Are you sure you want to delete this item?")) {
+                window.location.href = `/delete/Gallery/${selected.galleryid}`;
+            }
+        };
+
     </script>
 
 </body>
