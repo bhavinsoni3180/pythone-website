@@ -61,11 +61,11 @@
 
     <script>
         (function () {
-            const images = {{ images | tojson | safe
+            const galleryImages = {{ images | tojson | safe
         }};
 
         window.openModal = function (id) {
-            const selected = images.find(img => img.galleryid == id);
+            const selected = galleryImages.find(img => img.galleryid == id);
 
             if (!selected) {
                 alert('Media not found');
@@ -93,8 +93,9 @@
 
             modal.style.display = "flex";
         };
-    }) (); //Correctly closes and runs the function
+    }) ();
     </script>
+
 
 
 </body>
