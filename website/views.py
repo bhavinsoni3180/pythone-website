@@ -217,9 +217,9 @@ def admingallery():
     next_url = url_for('views.admingallery', page=pagination.next_num) if pagination.has_next else None
     prev_url = url_for('views.admingallery', page=pagination.prev_num) if pagination.has_prev else None
 
-     # Convert SQLAlchemy objects to dictionaries
+    # Use 'galleryid' key consistently here for JS
     image_dicts = [{
-        'id': img.galleryid,
+        'galleryid': img.galleryid,
         'title': img.title,
         'description': img.description,
         'client_name': img.client_name,

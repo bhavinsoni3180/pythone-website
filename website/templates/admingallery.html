@@ -15,32 +15,33 @@
     <header id="adminhome">
         <div class="gallery-container">
             {% for image in images %}
-            <div class="gallery-item" onclick="openModal('{{ image.galleryid }}')">
+            <div class="gallery-item" onclick="openModal('{{ image['galleryid'] }}')">
                 {% if image.media_type == 'image' %}
-                <img src="{{ url_for('static', filename=image.media_path) }}" alt="{{ image.title }}">
+                <img src="{{ url_for('static', filename=image.media_path) }}" alt="{{ image.title }}" />
                 {% elif image.media_type == 'video' %}
-                <video controls>
-                    <source src="{{ url_for('static', filename=image.media_path) }}" type="video/mp4">
+                <video>
+                    <source src="{{ url_for('static', filename=image.media_path) }}" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
                 {% endif %}
                 <div class="gallery-info">
-                    <strong>{{ image.title }}</strong><br>
-                    <em>{{ image.client_name }}</em><br>
+                    <strong>{{ image.title }}</strong><br />
+                    <em>{{ image.client_name }}</em><br />
                     <span>{{ image.description }}</span>
                 </div>
             </div>
             {% endfor %}
         </div>
 
-        <!-- Modal for Full Image View -->
+        <!-- Modal -->
         <div class="modal" id="imageModal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeModal()">×</span>
                 <div id="modalMedia"></div>
+                <div id="modalDetails" style="margin-top:10px; text-align:left;"></div>
                 <div class="modal-buttons">
-                    <a id="viewBtn" class="view-btn">View Info</a>
-                    <a id="deleteBtn" class="delete-btn">Delete</a>
+                    <a id="viewBtn" class="view-btn" href="#" target="_blank">View Info</a>
+                    <button id="deleteBtn" class="delete-btn">Delete</button>
                     <button class="close-btn" onclick="closeModal()">Close</button>
                 </div>
             </div>
@@ -61,7 +62,7 @@
 
     <script>
         (function () {
-            const galleryImages = {{ images | tojson | safe
+            const galleryImages = {{ images | tojson
         }};
 
         window.openModal = function (id) {
@@ -74,29 +75,48 @@
 
             const modal = document.getElementById("imageModal");
             const modalMedia = document.getElementById("modalMedia");
+            const modalDetails = document.getElementById("modalDetails");
             const viewBtn = document.getElementById("viewBtn");
             const deleteBtn = document.getElementById("deleteBtn");
 
             if (selected.media_type === "image") {
-                modalMedia.innerHTML = `<img src="/static/${selected.media_path}" alt="${selected.title}">`;
+                modalMedia.innerHTML = `<img src="/static/${selected.media_path}" alt="${selected.title}" />`;
             } else {
-                modalMedia.innerHTML = `<video controls><source src="/static/${selected.media_path}" type="video/mp4"></video>`;
+                modalMedia.innerHTML = `<video controls autoplay><source src="/static/${selected.media_path}" type="video/mp4"></video>`;
             }
+
+            modalDetails.innerHTML = `
+                    <strong>Title:</strong> ${selected.title} <br/>
+                    <strong>Client:</strong> ${selected.client_name} <br/>
+                    <strong>Description:</strong> ${selected.description}
+                `;
 
             viewBtn.href = `/adminviewdata?highlight_id=${selected.galleryid}`;
 
             deleteBtn.onclick = function () {
                 if (confirm("Are you sure you want to delete this item?")) {
-                    window.location.href = `/delete/Gallery/${selected.galleryid}`;
+                    window.location.href = `/delete/gallery/${selected.galleryid}`;
                 }
             };
 
             modal.style.display = "flex";
         };
-    }) ();
+
+        window.closeModal = function () {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        };
+
+        // Close modal on click outside modal-content
+        document.addEventListener("click", function (event) {
+            const modal = document.getElementById("imageModal");
+            const modalContent = document.querySelector(".modal-content");
+            if (modal.style.display === "flex" && !modalContent.contains(event.target) && !event.target.closest('.gallery-item')) {
+                closeModal();
+            }
+        });
+        }) ();
     </script>
-
-
 
 </body>
 
