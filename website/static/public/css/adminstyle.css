@@ -321,15 +321,19 @@ th {
   margin-bottom: 10px;
 }
 .modal-buttons {
-  margin-top: 10px;
+  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 .modal-buttons a,
 .modal-buttons button {
-  margin: 0 10px;
   padding: 10px 20px;
   border: none;
-  cursor: pointer;
   border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 .view-btn { 
   background-color: #3498db; 
