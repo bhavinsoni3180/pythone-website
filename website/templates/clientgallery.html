@@ -78,6 +78,80 @@
             document.getElementById("modalVideo").pause();  // stop video on close
         }
     </script>
+    <script>
+        // client-zoom
+        function initializeClientZoom() {
+            const img = document.getElementById('modalImage');
+            const modalContent = document.querySelector('.modal-content-client');
+
+            if (!img || !modalContent) return;
+
+            let scale = 1;
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            function updateTransform() {
+                img.style.transform = `scale(${scale}) translate(${currentX / scale}px, ${currentY / scale}px)`;
+            }
+
+            function resetZoom() {
+                scale = 1;
+                currentX = 0;
+                currentY = 0;
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'default';
+            }
+
+            // Reset zoom on every new image loaded
+            img.onload = resetZoom;
+
+            img.ondblclick = () => {
+                if (scale === 1) {
+                    scale = 2;
+                    img.style.cursor = 'grab';
+                } else {
+                    resetZoom();
+                }
+                updateTransform();
+            };
+
+            img.onmousedown = (e) => {
+                if (scale === 1) return;
+                isDragging = true;
+                startX = e.clientX - currentX;
+                startY = e.clientY - currentY;
+                img.style.cursor = 'grabbing';
+            };
+
+            modalContent.onmousemove = (e) => {
+                if (!isDragging) return;
+                currentX = e.clientX - startX;
+                currentY = e.clientY - startY;
+                updateTransform();
+            };
+
+            modalContent.onmouseup = () => {
+                if (scale > 1) img.style.cursor = 'grab';
+                isDragging = false;
+            };
+
+            modalContent.onmouseleave = () => {
+                if (scale > 1) img.style.cursor = 'grab';
+                isDragging = false;
+            };
+        }
+
+        // Initialize zoom feature every time modal opens with image
+        const originalOpenModal = window.openModal;
+        window.openModal = function (mediaSrc) {
+            originalOpenModal(mediaSrc);
+            setTimeout(() => initializeClientZoom(), 100);
+        };
+
+    </script>
 
 </body>
 

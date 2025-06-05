@@ -814,30 +814,37 @@ footer .social .s-link:hover {
 
 /* client side css */
 .gallery-container-client {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
     padding: 20px;
 }
 
 .gallery-item-client {
-    cursor: pointer;
+    position: relative;
     overflow: hidden;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    background: #fff;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 200px; 
 }
 
 .gallery-item-client:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 .gallery-item-client img,
 .gallery-item-client video {
     width: 100%;
     height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
     display: block;
-    border-radius: 10px;
 }
 
 /* Modal Styles css */
@@ -846,31 +853,69 @@ footer .social .s-link:hover {
     position: fixed;
     z-index: 1000;
     top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.8);
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
     justify-content: center;
     align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .modal-content-client {
     position: relative;
-    max-width: 90%;
-    max-height: 90%;
+    background: transparent;
+    max-width: 95%;
+    max-height: 95vh;
+    width: auto;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    cursor: default;
 }
 
 .modal-content-client img,
 .modal-content-client video {
-    width: 100%;
+    max-height: 80vh;
+    max-width: 100%;
     height: auto;
-    border-radius: 10px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+#modalImage {
+  user-select: none;
+  transition: transform 0.3s ease;
+  display: block;
+  max-width: 100%;
+  max-height: 80vh;
+  margin: auto;
 }
 
 .close-btn-client {
     position: absolute;
-    top: 10px; right: 20px;
-    font-size: 30px;
-    color: #000000;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    background-color: red;
+    color: white;
+    border-radius: 0 9px 0 9px;
+    padding: 1px 10px;
     cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.close-btn-client:hover {
+    background-color: #c0392b;
 }
 
 /* Navbar Responsive CSS */
@@ -923,18 +968,48 @@ footer .social .s-link:hover {
 /* responsive gallery */
 @media (max-width: 768px) {
   .gallery-container-client {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    padding: 1rem;
-    gap: 10px;
+     gap: 20px;
+      padding: 20px;
+      /* Switch to flex with 2 items per row */
+      display: flex;
+      flex-wrap: wrap;
   }
 
+  .gallery-item-client {
+        width: calc(50% - 10px); 
+    }
+
   .modal-content-client {
-    max-width: 95%;
-    max-height: 90%;
+    padding: 10px;
+    max-height: 90vh;
+  }
+
+  .modal-content-client img,
+  .modal-content-client video {
+    max-height: 50vh;
   }
 
   .close-btn-client {
-    top: 10px;
-    right: 10px;
+    font-size: 24px;
+    right: 15px;
+    padding: 2px 8px;
   }
+}
+
+@media (max-width: 480px) {
+    .gallery-container-client {
+        gap: 15px;
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .gallery-item-client {
+        width: 100%; /* 1 column on small devices */
+    }
+
+    .modal-content-client {
+        width: 95%;
+        padding: 10px;
+    }
 }
