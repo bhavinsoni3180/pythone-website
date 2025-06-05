@@ -117,9 +117,13 @@
                 }
                 updateTransform();
             };
-
+            // Prevent default image drag
+            img.ondragstart = (e) => {
+                e.preventDefault();
+            };
+            // Mouse down to start drag
             img.onmousedown = (e) => {
-                if (scale === 1) return;
+                if (e.button !== 0 || scale === 1) return;
                 isDragging = true;
                 startX = e.clientX - currentX;
                 startY = e.clientY - currentY;

@@ -830,7 +830,8 @@ footer .social .s-link:hover {
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 200px; 
+    width: 200px;
+    box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.5); 
 }
 
 .gallery-item-client:hover {
@@ -904,7 +905,6 @@ footer .social .s-link:hover {
 .close-btn-client {
     position: absolute;
     right: 20px;
-    top: 10px;
     font-size: 28px;
     background-color: red;
     color: white;
