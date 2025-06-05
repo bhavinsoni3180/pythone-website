@@ -99,16 +99,20 @@
         window.closeModal = function () {
             const modal = document.getElementById("imageModal");
             modal.style.display = "none";
-        };
+            const zoomImg = document.getElementById('zoomableImg');
+            if (zoomImg) {
+                zoomImg.style.transform = 'scale(1)';
+                zoomImg.style.cursor = 'default';
+            };
 
-        // Close modal on click outside modal-content
-        document.addEventListener("click", function (event) {
-            const modal = document.getElementById("imageModal");
-            const modalContent = document.querySelector(".modal-content");
-            if (modal.style.display === "flex" && !modalContent.contains(event.target) && !event.target.closest('.gallery-item')) {
-                closeModal();
-            }
-        });
+            // Close modal on click outside modal-content
+            document.addEventListener("click", function (event) {
+                const modal = document.getElementById("imageModal");
+                const modalContent = document.querySelector(".modal-content");
+                if (modal.style.display === "flex" && !modalContent.contains(event.target) && !event.target.closest('.gallery-item')) {
+                    closeModal();
+                }
+            });
         }) ();
     </script>
 
