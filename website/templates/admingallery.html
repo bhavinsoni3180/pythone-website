@@ -41,6 +41,8 @@
                 <div class="modal-buttons">
                     <a id="viewBtn" class="view-btn" href="#" target="_blank">View Info</a>
                     <button id="deleteBtn" class="delete-btn">Delete</button>
+                    <button id="zoomOutBtn" class="view-btn" onclick="manualZoomOut()" style="display:none;">Zoom
+                        Out</button>
                 </div>
             </div>
         </div>
@@ -77,16 +79,10 @@
             const deleteBtn = document.getElementById("deleteBtn");
 
             if (selected.media_type === "image") {
-                modalMedia.innerHTML = `<img src="/static/${selected.media_path}" alt="${selected.title}" />`;
+                modalMedia.innerHTML = `<div id="zoomWrapper" style="overflow: hidden; max-width: 100%; max-height: 80vh;"><img src="/static/${selected.media_path}" alt="${selected.title}" id="zoomImg" /></div>`;
             } else {
                 modalMedia.innerHTML = `<video controls autoplay><source src="/static/${selected.media_path}" type="video/mp4"></video>`;
             }
-
-            modalDetails.innerHTML = `
-                    <strong>Title:</strong> ${selected.title} <br/>
-                    <strong>Client:</strong> ${selected.client_name} <br/>
-                    <strong>Description:</strong> ${selected.description}
-                `;
 
             viewBtn.href = `/adminviewdata?highlight_id=${selected.galleryid}`;
 
@@ -114,6 +110,80 @@
             }
         });
         }) ();
+    </script>
+
+    <script>
+        function initializeZoomFeature() {
+            const img = document.getElementById('zoomImg');
+            const wrapper = document.getElementById('zoomWrapper');
+
+            if (!img || !wrapper) return;
+
+            let scale = 1;
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            function updateTransform() {
+                img.style.transform = `scale(${scale}) translate(${currentX / scale}px, ${currentY / scale}px)`;
+            }
+
+            function resetZoom() {
+                scale = 1;
+                currentX = 0;
+                currentY = 0;
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'default';
+            }
+
+            // Double-click to toggle zoom
+            img.ondblclick = () => {
+                if (scale === 1) {
+                    scale = 2;
+                    img.style.cursor = 'grab';
+                } else {
+                    resetZoom();
+                }
+                updateTransform();
+            };
+
+            // Mouse down to start drag
+            img.onmousedown = (e) => {
+                if (scale === 1) return;
+                isDragging = true;
+                startX = e.clientX - currentX;
+                startY = e.clientY - currentY;
+                img.style.cursor = 'grabbing';
+            };
+
+            // Drag image
+            wrapper.onmousemove = (e) => {
+                if (!isDragging) return;
+                currentX = e.clientX - startX;
+                currentY = e.clientY - startY;
+                updateTransform();
+            };
+
+            // Mouse up
+            wrapper.onmouseup = () => {
+                if (scale > 1) img.style.cursor = 'grab';
+                isDragging = false;
+            };
+
+            wrapper.onmouseleave = () => {
+                if (scale > 1) img.style.cursor = 'grab';
+                isDragging = false;
+            };
+        }
+
+        // Re-initialize every time modal opens
+        const originalOpenModal = window.openModal;
+        window.openModal = function (id) {
+            originalOpenModal(id);
+            setTimeout(() => initializeZoomFeature(), 100); // Allow modal content to load
+        };
     </script>
 
 </body>
