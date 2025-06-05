@@ -13,7 +13,7 @@
     {% include 'partials/navbar2.html' %}
 
     <header id="adminhome">
-        <div class="gallery-container">
+        <div class="gallery-container" id="zoom-container">
             {% for image in images %}
             <div class="gallery-item" onclick="openModal('{{ image['galleryid'] }}')">
                 {% if image.media_type == 'image' %}
@@ -41,6 +41,8 @@
                 <div class="modal-buttons">
                     <a id="viewBtn" class="view-btn" href="#" target="_blank">View Info</a>
                     <button id="deleteBtn" class="delete-btn">Delete</button>
+                    <button id="zoomOutBtn" class="view-btn" onclick="manualZoomOut()" style="display:none;">Zoom
+                        Out</button>
                 </div>
             </div>
         </div>
@@ -77,16 +79,10 @@
             const deleteBtn = document.getElementById("deleteBtn");
 
             if (selected.media_type === "image") {
-                modalMedia.innerHTML = `<img src="/static/${selected.media_path}" alt="${selected.title}" />`;
+                modalMedia.innerHTML = `<img src="/static/${selected.media_path}" alt="${selected.title}" id="zoomableImg" />`;
             } else {
                 modalMedia.innerHTML = `<video controls autoplay><source src="/static/${selected.media_path}" type="video/mp4"></video>`;
             }
-
-            modalDetails.innerHTML = `
-                    <strong>Title:</strong> ${selected.title} <br/>
-                    <strong>Client:</strong> ${selected.client_name} <br/>
-                    <strong>Description:</strong> ${selected.description}
-                `;
 
             viewBtn.href = `/adminviewdata?highlight_id=${selected.galleryid}`;
 
@@ -115,6 +111,75 @@
         });
         }) ();
     </script>
+
+    <script>
+        const img = document.getElementById('zoom-img');
+        const container = document.getElementById('zoom-container');
+
+        let scale = 1;
+        let isDragging = false;
+        let originX = 0;
+        let originY = 0;
+        let translateX = 0;
+        let translateY = 0;
+
+        // Mouse wheel zoom
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const scaleAmount = 0.1;
+            const direction = e.deltaY > 0 ? -1 : 1;
+            const newScale = scale + direction * scaleAmount;
+
+            if (newScale >= 1) {
+                scale = newScale;
+                updateTransform();
+            }
+
+            // Update cursor style
+            img.style.cursor = scale > 1 ? 'grab' : 'default';
+        });
+
+        // Dragging
+        container.addEventListener('mousedown', (e) => {
+            if (scale <= 1) return;
+            isDragging = true;
+            originX = e.clientX - translateX;
+            originY = e.clientY - translateY;
+            img.style.cursor = 'grabbing';
+        });
+
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            translateX = e.clientX - originX;
+            translateY = e.clientY - originY;
+            updateTransform();
+        });
+
+        container.addEventListener('mouseup', () => {
+            isDragging = false;
+            if (scale > 1) img.style.cursor = 'grab';
+        });
+
+        container.addEventListener('mouseleave', () => {
+            isDragging = false;
+            if (scale > 1) img.style.cursor = 'grab';
+        });
+
+        function updateTransform() {
+            img.style.transform = `scale(${scale}) translate(${translateX / scale}px, ${translateY / scale}px)`;
+        }
+
+        // Reset on modal close
+        function resetZoom() {
+            scale = 1;
+            translateX = 0;
+            translateY = 0;
+            img.style.transform = 'scale(1)';
+            img.style.cursor = 'default';
+        }
+    </script>
+
+
 
 </body>
 
