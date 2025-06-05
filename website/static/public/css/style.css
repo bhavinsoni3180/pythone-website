@@ -825,7 +825,7 @@ footer .social .s-link:hover {
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.7s ease-in-out;
     background: #fff;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);

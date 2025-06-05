@@ -258,14 +258,14 @@ th {
   overflow: hidden;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.7s ease-in-out;
   background: #fff;
   padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 200px;
   box-shadow: 0 4px 8px 2px rgba(0, 0, 0, 0.5);
 }
+
 .gallery-item img, .gallery-item video {
   width: 100%;
   height: auto;
