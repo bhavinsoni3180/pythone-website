@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,54 +11,184 @@
 
 <body>
     {% include 'partials/navbar2.html' %}
-    
+
     <header id="adminhome">
         <div class="gallery-container">
             {% for image in images %}
-            <div class="gallery-item" onclick="openModal('{{ url_for('static', filename=image.media_path) }}')">
+            <div class="gallery-item" onclick="openModal('{{ image['galleryid'] }}')">
                 {% if image.media_type == 'image' %}
-                <img src="{{ url_for('static', filename=image.media_path) }}" alt="{{ image.title }}">
+                <img src="{{ url_for('static', filename=image.media_path) }}" alt="{{ image.title }}" />
                 {% elif image.media_type == 'video' %}
-                <video controls>
-                    <source src="{{ url_for('static', filename=image.media_path) }}" type="video/mp4">
+                <video>
+                    <source src="{{ url_for('static', filename=image.media_path) }}" type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
                 {% endif %}
+                <div class="gallery-info">
+                    <strong>{{ image.title }}</strong><br />
+                    <em>{{ image.client_name }}</em><br />
+                    <span>{{ image.description }}</span>
+                </div>
             </div>
             {% endfor %}
         </div>
 
-        <!-- Modal for Full Image View -->
         <div class="modal" id="imageModal">
             <div class="modal-content">
-                <span class="close-btn" onclick="closeModal()">&times;</span>
-                <img id="modalImage" src="" alt="Full View">
+                <span class="close-btn" onclick="closeModal()">×</span>
+                <div id="modalMedia"></div>
+                <div id="modalDetails" style="margin-top:10px; text-align:left;"></div>
+                <div class="modal-buttons">
+                    <a id="viewBtn" class="view-btn" href="#" target="_blank">View Info</a>
+                    <button id="deleteBtn" class="delete-btn">Delete</button>
+                    <button id="zoomOutBtn" class="view-btn" onclick="manualZoomOut()" style="display:none;">Zoom
+                        Out</button>
+                </div>
             </div>
         </div>
-
         <!-- Pagination -->
         <div class="pagination">
             {% if prev_url %}
-                <a href="{{ prev_url }}">Previous</a>
+            <a href="{{ prev_url }}">Previous</a>
             {% endif %}
             {% if next_url %}
-                <a href="{{ next_url }}">Next</a>
+            <a href="{{ next_url }}">Next</a>
             {% endif %}
         </div>
     </header>
 
     {% include 'partials/footer.html' %}
-    
+
     <script>
-        function openModal(imageSrc) {
-            document.getElementById("modalImage").src = imageSrc;
-            document.getElementById("imageModal").style.display = "flex";
+        (function () {
+            const galleryImages = {{ images | tojson
+        }};
+
+        window.openModal = function (id) {
+            const selected = galleryImages.find(img => img.galleryid == id);
+
+            if (!selected) {
+                alert('Media not found');
+                return;
+            }
+
+            const modal = document.getElementById("imageModal");
+            const modalMedia = document.getElementById("modalMedia");
+            const modalDetails = document.getElementById("modalDetails");
+            const viewBtn = document.getElementById("viewBtn");
+            const deleteBtn = document.getElementById("deleteBtn");
+
+            if (selected.media_type === "image") {
+                modalMedia.innerHTML = `<div id="zoomWrapper" style="overflow: hidden; max-width: 100%; max-height: 80vh;"><img src="/static/${selected.media_path}" alt="${selected.title}" id="zoomImg" /></div>`;
+            } else {
+                modalMedia.innerHTML = `<video controls autoplay><source src="/static/${selected.media_path}" type="video/mp4"></video>`;
+            }
+
+            viewBtn.href = `/adminviewdata?highlight_id=${selected.galleryid}`;
+
+            deleteBtn.onclick = function () {
+                if (confirm("Are you sure you want to delete this item?")) {
+                    window.location.href = `/delete_gallery_item/${selected.galleryid}`;
+                }
+            };
+
+            modal.style.display = "flex";
+            document.querySelector('.modal-content').scrollTop = 0; // Scroll to top on open
+        };
+
+        window.closeModal = function () {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        };
+
+        // Close modal on click outside modal-content
+        document.addEventListener("click", function (event) {
+            const modal = document.getElementById("imageModal");
+            const modalContent = document.querySelector(".modal-content");
+            if (modal.style.display === "flex" && !modalContent.contains(event.target) && !event.target.closest('.gallery-item')) {
+                closeModal();
+            }
+        });
+        }) ();
+    </script>
+
+    <script>
+        function initializeZoomFeature() {
+            const img = document.getElementById('zoomImg');
+            const wrapper = document.getElementById('zoomWrapper');
+
+            if (!img || !wrapper) return;
+
+            let scale = 1;
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let currentX = 0;
+            let currentY = 0;
+
+            function updateTransform() {
+                img.style.transform = `scale(${scale}) translate(${currentX / scale}px, ${currentY / scale}px)`;
+            }
+
+            function resetZoom() {
+                scale = 1;
+                currentX = 0;
+                currentY = 0;
+                img.style.transform = 'scale(1)';
+                img.style.cursor = 'default';
+            }
+
+            // Double-click to toggle zoom
+            img.ondblclick = () => {
+                if (scale === 1) {
+                    scale = 2;
+                    img.style.cursor = 'grab';
+                } else {
+                    resetZoom();
+                }
+                updateTransform();
+            };
+            // Prevent default image drag
+            img.ondragstart = (e) => {
+                e.preventDefault();
+            };
+            // Mouse down to start drag
+            img.onmousedown = (e) => {
+                if (e.button !== 0 || scale === 1) return;
+                isDragging = true;
+                startX = e.clientX - currentX;
+                startY = e.clientY - currentY;
+                img.style.cursor = 'grabbing';
+            };
+
+            // Drag image
+            wrapper.onmousemove = (e) => {
+                if (!isDragging) return;
+                currentX = e.clientX - startX;
+                currentY = e.clientY - startY;
+                updateTransform();
+            };
+
+            // Mouse up
+            wrapper.onmouseup = () => {
+                if (scale > 1) img.style.cursor = 'grab';
+                isDragging = false;
+            };
+
+            wrapper.onmouseleave = () => {
+                if (scale > 1) img.style.cursor = 'grab';
+                isDragging = false;
+            };
         }
 
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
+        // Re-initialize every time modal opens
+        const originalOpenModal = window.openModal;
+        window.openModal = function (id) {
+            originalOpenModal(id);
+            setTimeout(() => initializeZoomFeature(), 100); // Allow modal content to load
+        };
     </script>
-    
+
 </body>
+
 </html>

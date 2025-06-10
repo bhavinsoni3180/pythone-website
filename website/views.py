@@ -217,4 +217,30 @@ def admingallery():
     next_url = url_for('views.admingallery', page=pagination.next_num) if pagination.has_next else None
     prev_url = url_for('views.admingallery', page=pagination.prev_num) if pagination.has_prev else None
 
-    return render_template('admingallery.html', images=images, next_url=next_url, prev_url=prev_url)
+    # Use 'galleryid' key consistently here for JS
+    image_dicts = [{
+        'galleryid': img.galleryid,
+        'title': img.title,
+        'description': img.description,
+        'client_name': img.client_name,
+        'media_type': img.media_type,
+        'media_path': img.media_path,
+        'user_id': img.user_id,
+        'username': img.username
+    } for img in images]
+
+    return render_template('admingallery.html', images=image_dicts, next_url=next_url, prev_url=prev_url)
+
+@views.route('/delete_gallery_item/<int:gallery_id>', methods=['GET'])
+@login_required
+def delete_gallery_item(gallery_id):
+    if current_user.type != 'admin':
+        flash("Access denied", "error")
+        return redirect(url_for('views.home'))
+
+    item = Gallery.query.get_or_404(gallery_id)
+    db.session.delete(item)
+    db.session.commit()
+    flash('Gallery item deleted successfully!', 'success')
+    return redirect(url_for('views.admingallery'))
+
