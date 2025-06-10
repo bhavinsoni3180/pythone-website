@@ -12,7 +12,7 @@ login_manager = LoginManager()
 
 @login_manager.user_loader
 
-
+#fix login
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -31,7 +31,7 @@ def login():
             flash('Invalid email or password', category='error')
 
     return render_template("login.html")
-
+# fix logout
 @auth.route('/logout')
 def logout():
     logout_user()  # This logs the user out
